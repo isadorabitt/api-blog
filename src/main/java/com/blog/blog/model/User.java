@@ -11,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Table(name = "usuario")
+@Builder
 public class User {
 
     @Id
@@ -18,6 +19,5 @@ public class User {
     private Long id;
     private String name;
     private String email;
-
-
+    private String password;
 }

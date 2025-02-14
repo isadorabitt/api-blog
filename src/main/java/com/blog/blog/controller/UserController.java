@@ -1,6 +1,8 @@
 package com.blog.blog.controller;
 
 
+import com.blog.blog.dto.UserRequestDTO;
+import com.blog.blog.dto.UserResponseDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,8 @@ public class UserController {
 
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-       return userService.save(user);
+    public UserResponseDTO createUser(@RequestBody UserRequestDTO request) {
+       return userService.save(request);
     }
 
     @GetMapping
@@ -37,4 +39,5 @@ public class UserController {
     public void deleteUser(@PathVariable Long id){
          userService.deleteUser(id);
     }
+
 }

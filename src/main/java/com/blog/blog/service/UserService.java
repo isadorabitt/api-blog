@@ -1,5 +1,7 @@
 package com.blog.blog.service;
 
+import com.blog.blog.dto.UserRequestDTO;
+import com.blog.blog.dto.UserResponseDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +16,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public UserResponseDTO save(UserRequestDTO request) {
+        User user = User.builder().name(request.name()).email(request.email()).build();
+        userRepository.save(user);
+        return new UserResponseDTO(user);
     }
 
     public List<User> getAll() {
         return userRepository.findAll();
-
     }
 
     public User findByUser(Long id) {

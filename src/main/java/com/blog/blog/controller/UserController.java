@@ -6,6 +6,8 @@ import com.blog.blog.dto.UserResponseDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +21,9 @@ public class UserController {
 
 
     @PostMapping
-    public UserResponseDTO createUser(@RequestBody UserRequestDTO request) {
-       return userService.save(request);
+    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO request) {
+        UserResponseDTO userResponseDTO = userService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO);
     }
 
     @GetMapping

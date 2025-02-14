@@ -18,10 +18,7 @@ public class UserService {
 
     public UserResponseDTO save(UserRequestDTO request) {
         User user = User.builder().name(request.name()).email(request.email()).build();
-<<<<<<< HEAD
-=======
 
->>>>>>> fc70986 (create responseDTO and requestDTO)
         userRepository.save(user);
         return new UserResponseDTO(user);
     }

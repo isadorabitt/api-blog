@@ -25,7 +25,6 @@ public class UserController {
         UserResponseDTO userResponseDTO = userService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO);
     }
-
     @GetMapping
     public List<User> getAll() {
         return userService.getAll();

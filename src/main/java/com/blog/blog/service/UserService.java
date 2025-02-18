@@ -36,8 +36,8 @@ public class UserService {
     public void updateUser(Long id, UserRequestDTO requestDTO) {
         var usuarioEncontrado = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
-            usuarioEncontrado.setName(requestDTO.name());
-            usuarioEncontrado.setEmail(requestDTO.email());
+        usuarioEncontrado.setName(requestDTO.name());
+        usuarioEncontrado.setEmail(requestDTO.email());
         userRepository.save(usuarioEncontrado);
 
 

@@ -3,6 +3,7 @@ package com.blog.blog.controller;
 
 import com.blog.blog.dto.UserRequestDTO;
 import com.blog.blog.dto.UserResponseDTO;
+import com.blog.blog.dto.UserUpdateDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,9 @@ public class UserController {
         return userService.findByUser(id);
     }
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user ){
-        return userService.updateUser(id,user);
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO requestDTO ){
+        userService.updateUser(id, requestDTO);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id){

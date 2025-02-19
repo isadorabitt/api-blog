@@ -2,7 +2,6 @@ package com.blog.blog.service;
 
 import com.blog.blog.dto.UserRequestDTO;
 import com.blog.blog.dto.UserResponseDTO;
-import com.blog.blog.dto.UserUpdateDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,13 @@ public class UserService {
         return new UserResponseDTO(user);
     }
 
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> getAll() {
+
+        var usuarios = userRepository.findAll();
+        return usuarios.stream().map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getEmail())).toList();
     }
 
-    public User findByUser(Long id) {
+    public User findUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
     }
@@ -39,7 +40,6 @@ public class UserService {
         usuarioEncontrado.setName(requestDTO.name());
         usuarioEncontrado.setEmail(requestDTO.email());
         userRepository.save(usuarioEncontrado);
-
 
     }
 

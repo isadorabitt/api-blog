@@ -3,7 +3,6 @@ package com.blog.blog.controller;
 
 import com.blog.blog.dto.UserRequestDTO;
 import com.blog.blog.dto.UserResponseDTO;
-import com.blog.blog.dto.UserUpdateDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +26,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO);
     }
     @GetMapping
-    public List<User> getAll() {
-        return userService.getAll();
+    public ResponseEntity<List<UserResponseDTO>> getAll() {
+        return ResponseEntity.ok().body(userService.getAll());
     }
     @GetMapping("/{id}")
-    public User findByUser(@PathVariable Long id){
-        return userService.findByUser(id);
+    public ResponseEntity<User> findUserById(@PathVariable Long id){
+        return ResponseEntity.ok().body(userService.findUserById(id));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO requestDTO ){
         userService.updateUser(id, requestDTO);

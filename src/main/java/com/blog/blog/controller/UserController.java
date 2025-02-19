@@ -5,6 +5,7 @@ import com.blog.blog.dto.UserRequestDTO;
 import com.blog.blog.dto.UserResponseDTO;
 import com.blog.blog.model.User;
 import com.blog.blog.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO request) {
+    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO request) {
         UserResponseDTO userResponseDTO = userService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDTO);
     }
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO requestDTO ){
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDTO requestDTO ){
         userService.updateUser(id, requestDTO);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
